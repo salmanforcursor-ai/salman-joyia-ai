@@ -33,7 +33,7 @@ export function Header() {
             <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
               <img src="/logo.svg" alt="SJ" className="w-8 h-8 block" />
             </div>
-            <span className="font-semibold text-foreground hidden sm:block">Muhammad Salman Iqbal</span>
+            <span className="font-semibold text-foreground hidden sm:block">Salman Joyia</span>
           </a>
 
           {/* Desktop Navigation */}
