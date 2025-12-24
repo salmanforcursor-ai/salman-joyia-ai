@@ -12,7 +12,7 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
-                <img src="/logo.svg" alt="SJ" className="w-5 h-5 block" />
+                <img src="/logo.svg?v=2" alt="SJ" className="w-5 h-5 block" />
               </div>
               <p className="text-sm text-muted-foreground">
                 © {currentYear} Muhammad Salman Iqbal. All rights reserved.
