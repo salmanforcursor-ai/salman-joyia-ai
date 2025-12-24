@@ -31,7 +31,7 @@ export function Header() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
-              <img src="/logo.svg?v=2" alt="SJ" className="w-8 h-8 block" />
+              <img src="/logo.svg?v=3" alt="SJ" className="w-8 h-8 block" />
             </div>
             <span className="font-semibold text-foreground hidden sm:block">Salman Joyia</span>
           </a>
