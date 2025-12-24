@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main id="main" className="scroll-smooth">
         <HeroSection />
         <AboutSection />
         <UseCasesSection />

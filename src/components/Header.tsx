@@ -36,8 +36,17 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main"
+        className="absolute -top-10 left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-lg focus:top-4 transition-all font-semibold"
+      >
+        Skip to main content
+      </a>
+      
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
@@ -111,7 +120,8 @@ export function Header() {
             </div>
           </nav>
         )}
-      </div>
-    </header>
+        </div>
+      </header>
+    </>
   );
 }

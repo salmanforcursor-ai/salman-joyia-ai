@@ -23,7 +23,7 @@ export function CaseStudiesSection() {
             {caseStudies.map((caseStudy, index) => (
               <div
                 key={caseStudy.id}
-                className={`overflow-hidden border border-border/50 rounded-2xl shadow-card hover:shadow-lg transition-shadow ${
+                className={`overflow-hidden border-2 border-border rounded-2xl shadow-card hover:shadow-lg transition-all card-hover ${
                   index % 2 === 0 ? "bg-card" : "bg-secondary/20"
                 }`}
               >
@@ -34,15 +34,15 @@ export function CaseStudiesSection() {
                       {/* Header */}
                       <div className="mb-6">
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-semibold rounded-full">
+                          <span className="inline-block px-3 py-1.5 bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest rounded-full border border-primary/30">
                             {caseStudy.industry}
                           </span>
-                          <span className="text-xs text-muted-foreground">{caseStudy.timeline}</span>
+                          <span className="text-xs font-semibold text-muted-foreground uppercase">{caseStudy.timeline}</span>
                         </div>
                         <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
                           {caseStudy.title}
                         </h3>
-                        <p className="text-sm text-primary font-medium mb-3">{caseStudy.client}</p>
+                        <p className="text-sm text-primary font-bold uppercase tracking-widest mb-3">{caseStudy.client}</p>
                         <p className="text-muted-foreground leading-relaxed">
                           {caseStudy.shortDescription}
                         </p>
@@ -90,17 +90,17 @@ export function CaseStudiesSection() {
                         <h4 className="text-lg font-semibold text-foreground">Key Results</h4>
                       </div>
 
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         {caseStudy.results.map((result, idx) => (
                           <div
                             key={idx}
-                            className="p-3 bg-background rounded-lg border border-border/50"
+                            className="p-4 bg-background rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-all"
                           >
-                            <p className="text-xs text-muted-foreground mb-1">{result.metric}</p>
-                            <p className="text-lg md:text-2xl font-bold text-primary mb-1">
+                            <p className="metric-label">{result.metric}</p>
+                            <p className="metric-value my-1">
                               {result.value}
                             </p>
-                            <p className="text-xs md:text-sm text-foreground font-medium">
+                            <p className="metric-impact">
                               {result.impact}
                             </p>
                           </div>

@@ -22,7 +22,7 @@ export function TestimonialsSection() {
             {testimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="p-6 bg-card rounded-2xl border border-border/50 shadow-card hover:shadow-lg hover:border-primary/50 transition-all"
+                className="p-6 bg-card rounded-2xl border-2 border-border shadow-card hover:shadow-lg hover:border-primary/40 transition-all card-hover flex flex-col"
               >
                 {/* Rating */}
                 <div className="flex gap-1 mb-4">
@@ -32,15 +32,15 @@ export function TestimonialsSection() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-muted-foreground mb-6 leading-relaxed italic">
+                <p className="text-muted-foreground mb-6 leading-relaxed italic flex-grow">
                   "{testimonial.content}"
                 </p>
 
                 {/* Author */}
                 <div className="border-t border-border/50 pt-4">
-                  <p className="font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-primary font-medium">{testimonial.title}</p>
-                  <p className="text-xs text-muted-foreground">{testimonial.company}</p>
+                  <p className="font-semibold text-foreground text-sm">{testimonial.name}</p>
+                  <p className="text-xs text-primary font-semibold uppercase tracking-wide">{testimonial.title}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{testimonial.company}</p>
                 </div>
               </div>
             ))}

@@ -42,14 +42,14 @@ export function CertificationsSection() {
             {Object.entries(certsByCategory).map(([category, certs]) => (
               <div
                 key={category}
-                className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card hover:shadow-lg transition-shadow"
+                className="p-6 lg:p-8 bg-card rounded-2xl border-2 border-border shadow-card card-hover"
               >
                 {/* Category Header */}
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Award size={20} className="text-primary" />
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Award size={24} className="text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground">{category}</h3>
+                  <h3 className="text-lg font-bold text-foreground">{category}</h3>
                 </div>
 
                 {/* Certificates List */}
@@ -57,7 +57,7 @@ export function CertificationsSection() {
                   {certs.map((cert) => (
                     <div
                       key={cert.id}
-                      className="p-4 bg-secondary/30 rounded-xl border border-border/50 hover:bg-secondary/50 transition-colors"
+                      className="p-4 bg-secondary/40 rounded-lg border-2 border-border/50 hover:border-primary/40 hover:bg-secondary/60 transition-all"
                     >
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <div className="flex-1">

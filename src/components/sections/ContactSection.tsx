@@ -105,58 +105,78 @@ export function ContactSection() {
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Contact Form */}
-            <div className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card">
+            <div className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card card-hover">
               <h3 className="text-xl font-semibold text-foreground mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="text-sm font-medium text-foreground block mb-2">Name *</label>
+                  <label htmlFor="name" className="text-sm font-semibold text-foreground block mb-2">
+                    Name <span className="text-destructive">*</span>
+                  </label>
                   <Input
+                    id="name"
                     name="name"
-                    placeholder="Your name"
+                    placeholder="Your full name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="bg-secondary/50"
+                    className="input-enhanced"
+                    aria-required="true"
+                    aria-label="Full name"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-foreground block mb-2">Email *</label>
+                  <label htmlFor="email" className="text-sm font-semibold text-foreground block mb-2">
+                    Email <span className="text-destructive">*</span>
+                  </label>
                   <Input
+                    id="email"
                     name="email"
                     type="email"
-                    placeholder="your@email.com"
+                    placeholder="you@company.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="bg-secondary/50"
+                    className="input-enhanced"
+                    aria-required="true"
+                    aria-label="Email address"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-foreground block mb-2">Company</label>
+                  <label htmlFor="company" className="text-sm font-semibold text-foreground block mb-2">
+                    Company <span className="text-muted-foreground text-xs">(optional)</span>
+                  </label>
                   <Input
+                    id="company"
                     name="company"
-                    placeholder="Your company (optional)"
+                    placeholder="Your company name"
                     value={formData.company}
                     onChange={handleChange}
-                    className="bg-secondary/50"
+                    className="input-enhanced"
+                    aria-label="Company name"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-foreground block mb-2">Message *</label>
+                  <label htmlFor="message" className="text-sm font-semibold text-foreground block mb-2">
+                    Message <span className="text-destructive">*</span>
+                  </label>
                   <Textarea
+                    id="message"
                     name="message"
-                    placeholder="Tell me about your project or challenge..."
+                    placeholder="Describe your project, challenge, or automation need..."
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="bg-secondary/50 resize-none"
+                    className="input-enhanced resize-none"
+                    aria-required="true"
+                    aria-label="Your message"
                   />
                 </div>
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full gap-2"
+                  className="w-full gap-2 font-semibold"
+                  size="lg"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                   {!isSubmitting && <ArrowRight size={16} />}
@@ -167,7 +187,7 @@ export function ContactSection() {
             {/* Contact Info */}
             <div className="flex flex-col gap-6">
               {/* Quick Links */}
-              <div className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card">
+              <div className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card card-hover">
                 <h3 className="text-xl font-semibold text-foreground mb-6">Connect Directly</h3>
                 <div className="space-y-3">
                   {contactLinks.map((link) => (
@@ -176,7 +196,8 @@ export function ContactSection() {
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="flex items-center gap-4 p-4 bg-secondary/50 rounded-xl hover:bg-secondary hover:border-primary/50 transition-colors border border-transparent group"
+                      className="flex items-center gap-4 p-4 bg-secondary/50 rounded-xl hover:bg-primary/10 hover:border-primary/40 transition-all border border-border/50 group"
+                      aria-label={`Contact via ${link.label}`}
                     >
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
                         <link.icon size={20} className="text-primary" />

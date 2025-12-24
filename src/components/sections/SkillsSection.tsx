@@ -35,41 +35,41 @@ export function SkillsSection() {
             {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
               <div
                 key={category}
-                className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card hover:shadow-lg transition-shadow"
+                className="p-6 lg:p-8 bg-card rounded-2xl border-2 border-border shadow-card card-hover"
               >
                 {/* Category Header */}
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl">{categoryIcons[category] || "📚"}</span>
-                  <h3 className="text-xl font-semibold text-foreground">{category}</h3>
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="text-3xl">{categoryIcons[category] || "📚"}</span>
+                  <h3 className="text-xl font-bold text-foreground">{category}</h3>
                 </div>
 
                 {/* Skills List */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {categorySkills.map((skill) => (
-                    <div key={skill.id} className="flex items-start justify-between gap-3">
+                    <div key={skill.id} className="flex items-start justify-between gap-3 p-3 rounded-lg hover:bg-secondary/30 transition-colors">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <p className="font-medium text-foreground">{skill.name}</p>
+                        <div className="flex items-center gap-2 mb-2">
+                          <p className="font-semibold text-foreground text-sm md:text-base">{skill.name}</p>
                           <Badge
                             variant="outline"
-                            className={`text-xs ${proficiencyColors[skill.proficiency]}`}
+                            className={`text-xs font-bold uppercase tracking-widest ${proficiencyColors[skill.proficiency]}`}
                           >
                             {skill.proficiency}
                           </Badge>
                         </div>
-                        <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
+                        <div className="h-2 bg-secondary/50 rounded-full overflow-hidden border border-border/50">
                           <div
-                            className={`h-full rounded-full ${
+                            className={`h-full rounded-full transition-all duration-500 ${
                               skill.proficiency === "expert"
-                                ? "bg-primary w-full"
+                                ? "bg-gradient-to-r from-primary to-accent w-full"
                                 : skill.proficiency === "advanced"
-                                  ? "bg-accent w-4/5"
+                                  ? "bg-gradient-to-r from-accent to-primary w-4/5"
                                   : "bg-muted-foreground w-3/5"
                             }`}
                           />
                         </div>
                       </div>
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      <span className="text-xs font-semibold text-muted-foreground whitespace-nowrap bg-secondary/50 px-2 py-1 rounded">
                         {skill.yearsOfExperience}y
                       </span>
                     </div>

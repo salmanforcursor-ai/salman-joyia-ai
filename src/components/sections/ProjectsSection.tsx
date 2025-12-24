@@ -24,7 +24,7 @@ export function ProjectsSection() {
             {projects.map((project, index) => (
               <div
                 key={project.id}
-                className={`p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card hover-lift group ${
+                className={`p-6 lg:p-8 bg-card rounded-2xl border-2 border-border shadow-card card-hover ${
                   project.featured && index === 0 ? "lg:col-span-2" : ""
                 }`}
               >
@@ -34,7 +34,7 @@ export function ProjectsSection() {
                     <h3 className="text-xl lg:text-2xl font-semibold text-foreground mb-2">
                       {project.title}
                     </h3>
-                    <p className="text-sm text-primary font-medium">{project.role}</p>
+                    <p className="text-xs text-primary font-semibold uppercase tracking-widest">{project.role}</p>
                   </div>
 
                   {/* Description */}
@@ -43,9 +43,10 @@ export function ProjectsSection() {
                   </p>
 
                   {/* Impact */}
-                  <div className="p-3 bg-primary/5 rounded-lg mb-4 border border-primary/10">
-                    <p className="text-sm font-medium text-foreground">
-                      <span className="text-primary">📈</span> {project.impact}
+                  <div className="p-4 bg-primary/5 rounded-lg mb-4 border-2 border-primary/20 hover:border-primary/40 transition-colors">
+                    <p className="text-sm font-semibold text-foreground">
+                      <span className="text-primary mr-2">📈</span> 
+                      <span className="text-primary font-bold">{project.impact}</span>
                     </p>
                   </div>
 
@@ -54,7 +55,7 @@ export function ProjectsSection() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground rounded-full"
+                        className="px-3 py-1.5 text-xs font-semibold bg-secondary text-secondary-foreground rounded-full border border-border/50 hover:border-primary/40 transition-colors"
                       >
                         {tag}
                       </span>
@@ -62,20 +63,20 @@ export function ProjectsSection() {
                   </div>
 
                   {/* CTA Buttons */}
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 pt-4 border-t border-border/50">
                     {project.github && (
-                      <Button variant="outline" size="sm" className="gap-2 flex-1" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="sm" className="gap-2 flex-1 font-semibold" asChild>
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="View code on GitHub">
                           <Github size={16} />
                           Code
                         </a>
                       </Button>
                     )}
                     {project.link && (
-                      <Button size="sm" className="gap-2 flex-1" asChild>
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" className="gap-2 flex-1 font-semibold" asChild>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label="View project">
                           <ExternalLink size={16} />
-                          View
+                          Demo
                         </a>
                       </Button>
                     )}
