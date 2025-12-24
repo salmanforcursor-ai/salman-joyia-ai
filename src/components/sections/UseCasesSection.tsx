@@ -1,17 +1,23 @@
 import { 
   AlertTriangle,
   CheckCircle2,
-  Lightbulb
+  Lightbulb,
+  Target,
+  Mail,
+  FileText,
+  MessageSquare,
+  Repeat,
+  Bell
 } from "lucide-react";
 import { useCases } from "@/data";
 
-const iconMap: Record<string, React.ReactNode> = {
-  FileText: "📄",
-  Zap: "⚡",
-  BarChart3: "📊",
-  Users: "👥",
-  Network: "🔗",
-  GitBranch: "🔀",
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Target: Target,
+  Mail: Mail,
+  FileText: FileText,
+  MessageSquare: MessageSquare,
+  Repeat: Repeat,
+  Bell: Bell,
 };
 
 export function UseCasesSection() {
@@ -40,11 +46,18 @@ export function UseCasesSection() {
               >
                 {/* Header */}
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="text-3xl flex-shrink-0">
-                    {iconMap[useCase.icon] || "💼"}
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 border border-primary/20 transition-all group-hover:bg-primary/15 group-hover:border-primary/30 group-hover:scale-105">
+                    {iconMap[useCase.icon] ? (
+                      (() => {
+                        const IconComponent = iconMap[useCase.icon];
+                        return <IconComponent size={24} className="text-primary transition-transform group-hover:scale-110" />;
+                      })()
+                    ) : (
+                      <FileText size={24} className="text-primary transition-transform group-hover:scale-110" />
+                    )}
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-foreground">{useCase.title}</h3>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">{useCase.title}</h3>
                     {useCase.industry && (
                       <p className="text-xs text-primary font-medium mt-1">{useCase.industry}</p>
                     )}
