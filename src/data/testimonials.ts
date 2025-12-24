@@ -15,7 +15,7 @@ export const testimonials: Testimonial[] = [
     title: "VP of Operations",
     company: "Global Tech Solutions",
     content:
-      "Working with Salman transformed how we handle document processing. What took our team 3 days now takes 3 hours. His attention to detail and understanding of enterprise needs was exceptional.",
+      "Salman automated our invoice processing workflow using n8n and Python. What previously took our accounting team 3 days of manual data entry now completes in 3 hours with 98% accuracy. His ability to understand our business processes and translate them into efficient automation was impressive. The ROI was evident within the first month.",
     rating: 5,
   },
   {
@@ -24,7 +24,7 @@ export const testimonials: Testimonial[] = [
     title: "Finance Director",
     company: "Financial Services Group",
     content:
-      "The AI solution Salman built reduced our month-end close time from 10 days to 2 days. Beyond the technical excellence, his communication made complex AI concepts understandable to our entire team.",
+      "We needed to streamline our month-end financial close process. Salman designed an AI-powered solution using Make.com that integrated our ERP, accounting software, and reporting tools. The close time dropped from 10 days to 2 days, and our finance team can now focus on analysis instead of data entry. His documentation and knowledge transfer were excellent.",
     rating: 5,
   },
   {
@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     title: "Chief Digital Officer",
     company: "Manufacturing Corp",
     content:
-      "Salman's RPA implementation saved us 2,000+ hours annually across HR and Finance. His strategic approach to process optimization and change management was crucial to our success.",
+      "Salman implemented RPA solutions across our HR and Finance departments, automating employee onboarding, payroll processing, and vendor management. We've saved over 2,000 hours annually, and the error rate dropped to near zero. His strategic thinking about process optimization and change management helped ensure smooth adoption across our organization.",
     rating: 5,
   },
   {
@@ -42,7 +42,7 @@ export const testimonials: Testimonial[] = [
     title: "Operations Manager",
     company: "Healthcare Services Inc",
     content:
-      "We engaged Salman for an audit automation project and ended up expanding it to 15 workflows. His expertise in combining RPA with AI is unmatched in the market.",
+      "We started with a single audit automation project, but Salman's work was so effective that we expanded to 15 workflows across compliance, claims processing, and patient data management. His expertise in combining RPA with AI for intelligent document processing has been transformative. He's responsive, professional, and delivers on time.",
     rating: 5,
   },
 ];

@@ -1,28 +1,32 @@
-import { Mail, Linkedin, Github, ArrowRight, MessageSquare, Phone } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { Mail, Linkedin, Github, ArrowRight, MessageSquare, Phone, AlertCircle } from "lucide-react";
+import { useState, FormEvent, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { config } from "@/config/constants";
+import { validateContactForm, sanitizeInput } from "@/lib/form-validation";
+import { checkRateLimit, recordSubmission, getTimeUntilReset } from "@/lib/rate-limiter";
+import { trackFormSubmission, trackCTAClick } from "@/lib/analytics";
 
 const contactLinks = [
   {
     icon: Mail,
     label: "Email",
-    value: "contact@salmanjoyia.com",
-    href: "mailto:contact@salmanjoyia.com",
+    value: config.contactEmail,
+    href: `mailto:${config.contactEmail}`,
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
-    value: "linkedin.com/in/salmanjoyia",
-    href: "https://linkedin.com/in/salmanjoyia",
+    value: config.social.linkedin.replace("https://", ""),
+    href: config.social.linkedin,
   },
   {
     icon: Github,
     label: "GitHub",
-    value: "github.com/salmanjoyia",
-    href: "https://github.com/salmanjoyia",
+    value: config.social.github.replace("https://", ""),
+    href: config.social.github,
   },
 ];
 
@@ -32,50 +36,134 @@ export function ContactSection() {
     email: "",
     company: "",
     message: "",
+    honeypot: "", // Hidden field for spam protection
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [rateLimitExceeded, setRateLimitExceeded] = useState(false);
+  const [timeUntilReset, setTimeUntilReset] = useState(0);
+
+  // Check rate limit on mount and periodically
+  useEffect(() => {
+    const checkLimit = () => {
+      const exceeded = checkRateLimit();
+      setRateLimitExceeded(exceeded);
+      if (exceeded) {
+        setTimeUntilReset(getTimeUntilReset());
+      }
+    };
+
+    checkLimit();
+    const interval = setInterval(() => {
+      checkLimit();
+      if (rateLimitExceeded) {
+        setTimeUntilReset(getTimeUntilReset());
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [rateLimitExceeded]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Sanitize input
+    const sanitized = name === "honeypot" ? value : sanitizeInput(value);
+    setFormData((prev) => ({ ...prev, [name]: sanitized }));
+    // Clear error for this field when user types
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrors({});
+
+    // Check rate limit
+    if (checkRateLimit()) {
+      const timeRemaining = getTimeUntilReset();
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      toast({
+        title: "Rate limit exceeded",
+        description: `Please wait ${minutes}m ${seconds}s before submitting again.`,
+        variant: "destructive",
+      });
+      setRateLimitExceeded(true);
+      setTimeUntilReset(timeRemaining);
+      return;
+    }
+
+    // Check honeypot (spam protection)
+    if (formData.honeypot) {
+      // Bot detected - silently fail
+      console.warn("Spam detected via honeypot");
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      setFormData({ name: "", email: "", company: "", message: "", honeypot: "" });
+      return;
+    }
+
+    // Validate form
+    const validation = validateContactForm(formData);
+    if (!validation.success) {
+      setErrors(validation.errors || {});
+      toast({
+        title: "Validation error",
+        description: "Please check the form and fix any errors.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Using Formspree - replace with your form ID
-      const formspreeId = "YOUR_FORMSPREE_ID"; // Get this from formspree.io
-      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+      if (!config.formspreeId) {
+        throw new Error("Form configuration missing");
+      }
+
+      const response = await fetch(`https://formspree.io/f/${config.formspreeId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          message: formData.message,
+          name: validation.data!.name,
+          email: validation.data!.email,
+          company: validation.data!.company || "",
+          message: validation.data!.message,
+          _subject: `Contact Form: ${validation.data!.name}`,
         }),
       });
 
       if (response.ok) {
+        recordSubmission();
+        trackFormSubmission("contact", true);
         toast({
           title: "Message sent!",
           description: "Thanks for reaching out. I'll get back to you soon.",
         });
-        setFormData({ name: "", email: "", company: "", message: "" });
+        setFormData({ name: "", email: "", company: "", message: "", honeypot: "" });
+        setErrors({});
       } else {
+        trackFormSubmission("contact", false);
+        const errorData = await response.json().catch(() => ({}));
         toast({
           title: "Error",
-          description: "Failed to send message. Please try again.",
+          description: errorData.error || "Failed to send message. Please try again.",
           variant: "destructive",
         });
       }
     } catch (error) {
       // Fallback to mailto if Formspree fails
-      const mailtoLink = `mailto:contact@salmanjoyia.com?subject=Contact from ${formData.name}&body=${encodeURIComponent(
+      const mailtoLink = `mailto:${config.contactEmail}?subject=Contact from ${formData.name}&body=${encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`
       )}`;
       window.location.href = mailtoLink;
@@ -107,7 +195,32 @@ export function ContactSection() {
             {/* Contact Form */}
             <div className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card card-hover">
               <h3 className="text-xl font-semibold text-foreground mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                {/* Honeypot field - hidden from users */}
+                <input
+                  type="text"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}
+                  aria-hidden="true"
+                />
+
+                {/* Rate limit warning */}
+                {rateLimitExceeded && (
+                  <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-start gap-3">
+                    <AlertCircle size={20} className="text-destructive flex-shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-destructive">Rate limit exceeded</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Please wait {Math.floor(timeUntilReset / 60)}m {timeUntilReset % 60}s before submitting again.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <label htmlFor="name" className="text-sm font-semibold text-foreground block mb-2">
                     Name <span className="text-destructive">*</span>
@@ -119,10 +232,18 @@ export function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="input-enhanced"
+                    className={`input-enhanced ${errors.name ? "border-destructive" : ""}`}
                     aria-required="true"
                     aria-label="Full name"
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "name-error" : undefined}
                   />
+                  {errors.name && (
+                    <p id="name-error" className="text-xs text-destructive mt-1 flex items-center gap-1">
+                      <AlertCircle size={12} />
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className="text-sm font-semibold text-foreground block mb-2">
@@ -136,10 +257,18 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="input-enhanced"
+                    className={`input-enhanced ${errors.email ? "border-destructive" : ""}`}
                     aria-required="true"
                     aria-label="Email address"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
+                  {errors.email && (
+                    <p id="email-error" className="text-xs text-destructive mt-1 flex items-center gap-1">
+                      <AlertCircle size={12} />
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="company" className="text-sm font-semibold text-foreground block mb-2">
@@ -151,9 +280,17 @@ export function ContactSection() {
                     placeholder="Your company name"
                     value={formData.company}
                     onChange={handleChange}
-                    className="input-enhanced"
+                    className={`input-enhanced ${errors.company ? "border-destructive" : ""}`}
                     aria-label="Company name"
+                    aria-invalid={!!errors.company}
+                    aria-describedby={errors.company ? "company-error" : undefined}
                   />
+                  {errors.company && (
+                    <p id="company-error" className="text-xs text-destructive mt-1 flex items-center gap-1">
+                      <AlertCircle size={12} />
+                      {errors.company}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="message" className="text-sm font-semibold text-foreground block mb-2">
@@ -167,14 +304,22 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="input-enhanced resize-none"
+                    className={`input-enhanced resize-none ${errors.message ? "border-destructive" : ""}`}
                     aria-required="true"
                     aria-label="Your message"
+                    aria-invalid={!!errors.message}
+                    aria-describedby={errors.message ? "message-error" : undefined}
                   />
+                  {errors.message && (
+                    <p id="message-error" className="text-xs text-destructive mt-1 flex items-center gap-1">
+                      <AlertCircle size={12} />
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || rateLimitExceeded}
                   className="w-full gap-2 font-semibold"
                   size="lg"
                 >
@@ -198,6 +343,7 @@ export function ContactSection() {
                       rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="flex items-center gap-4 p-4 bg-secondary/50 rounded-xl hover:bg-primary/10 hover:border-primary/40 transition-all border border-border/50 group"
                       aria-label={`Contact via ${link.label}`}
+                      onClick={() => trackCTAClick(`contact_${link.label.toLowerCase()}`, "contact_section")}
                     >
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
                         <link.icon size={20} className="text-primary" />

@@ -12,80 +12,80 @@ export interface UseCase {
 export const useCases: UseCase[] = [
   {
     id: "1",
-    title: "Document Automation",
-    icon: "FileText",
-    description: "Intelligent document processing and classification at scale",
+    title: "Lead Scoring & Qualification",
+    icon: "Target",
+    description: "Automate lead capture, scoring, and CRM sync with n8n/Make",
     problem:
-      "Manual document processing slows down operations and introduces human error. Employees spend hours on data entry instead of high-value work.",
+      "Manual lead qualification wastes hours. Leads fall through cracks. Sales team drowns in unqualified prospects.",
     solution:
-      "Deploy AI-powered OCR and document classification to automatically extract, validate, and route documents to appropriate systems. RPA handles the post-processing workflows.",
+      "Use n8n or Make to capture leads from forms, websites, and ads. Score automatically based on behavior. Sync qualified leads to Salesforce instantly with custom Python logic.",
     benefit:
-      "80-90% reduction in manual processing time, 99%+ accuracy, immediate ROI through staff cost savings",
-    industry: "Finance, Healthcare, Insurance",
+      "50% faster sales response, 35% higher conversion, 25+ hours/week saved for sales team",
+    industry: "SaaS, B2B",
   },
   {
     id: "2",
-    title: "Process Automation",
-    icon: "Zap",
-    description: "End-to-end workflow automation for repetitive tasks",
+    title: "Email & SMS Automation Campaigns",
+    icon: "Mail",
+    description: "Triggered campaigns at scale using Zapier and Python",
     problem:
-      "Repetitive, rule-based processes consume 30-40% of operational staff time. Multiple system integrations create manual data handoffs and errors.",
+      "Manual email sending = low engagement. One-size-fits-all blasts don't convert. Limited personalization.",
     solution:
-      "Map workflows using process mining, identify automation opportunities, build RPA bots to execute tasks 24/7 without human intervention. Integrate with legacy and modern systems.",
+      "Build Zapier workflows for event-triggered emails (signup, purchase, abandoned cart). Add Python backend for dynamic content and A/B testing. Integrate with analytics for optimization.",
     benefit:
-      "50-70% cost reduction, 24/7 operation, improved compliance, employees focus on strategy",
-    industry: "Finance, HR, Procurement",
+      "40% improvement in open rates, 3x higher click-through, unlimited scale without extra headcount",
+    industry: "E-commerce, SaaS, Marketing",
   },
   {
     id: "3",
-    title: "AI-Powered Analytics",
-    icon: "BarChart3",
-    description: "Predictive insights and intelligent decision-making",
+    title: "Invoice & Receipt Processing",
+    icon: "FileText",
+    description: "Extract data from docs and auto-post to accounting",
     problem:
-      "Decision-makers rely on historical dashboards, not forward-looking insights. Missed growth opportunities and slow response to market changes.",
+      "Manual invoice entry = expensive and error-prone. Months of AP backlog. Poor vendor relationships due to slow payments.",
     solution:
-      "Build ML models to predict customer churn, demand forecasting, anomaly detection, and trend analysis. Integrate into real-time dashboards with automated alerts.",
+      "Use Make.com with document AI to extract invoice data. Match to POs automatically. Post to QuickBooks/Xero via API. Route exceptions for human review.",
     benefit:
-      "Proactive decisions, 20-40% improvement in targeting efficiency, early detection of risks",
-    industry: "Retail, SaaS, Manufacturing",
+      "95%+ accuracy, 90% time reduction in AP processing, improve vendor relationships, catch fraud early",
+    industry: "Finance, Operations",
   },
   {
     id: "4",
-    title: "Customer Data Intelligence",
-    icon: "Users",
-    description: "Unified customer insights from fragmented data sources",
+    title: "Customer Support Ticket Automation",
+    icon: "MessageSquare",
+    description: "Auto-categorize, route, and respond to support tickets",
     problem:
-      "Customer data lives in multiple systems (CRM, ERP, support tickets). No single source of truth leads to inconsistent customer experiences and missed upsell opportunities.",
+      "Support team manually reads every ticket. Takes hours to categorize and route. Simple questions clog the system.",
     solution:
-      "Implement customer data platform (CDP) to consolidate data, build 360 customer profiles using AI enrichment, enable real-time personalization and targeting.",
+      "Use n8n to intercept tickets. Route based on AI classification. Use ChatGPT for instant responses to FAQs. Route complex issues to right team. Integrate with help desk API.",
     benefit:
-      "34%+ increase in customer retention, 2x improvement in marketing ROI, faster deal cycles",
-    industry: "SaaS, B2B, Financial Services",
+      "70% of tickets resolved instantly, 80% faster resolution for human issues, happier customers",
+    industry: "SaaS, Support",
   },
   {
     id: "5",
-    title: "Intelligent Process Mining",
-    icon: "Network",
-    description: "Deep process analysis to uncover hidden automation opportunities",
+    title: "Data Synchronization Between Apps",
+    icon: "Repeat",
+    description: "Keep data in sync across 5+ tools with Zapier/n8n",
     problem:
-      "Organizations don't know where time and money are actually being spent in their processes. Traditional process mapping is outdated before completion.",
+      "Data in multiple tools (CRM, email, ads, analytics) = duplicates, conflicts, stale data everywhere.",
     solution:
-      "Use process mining tools to analyze event logs in real-time. Identify bottlenecks, deviations, redundancies, and automation opportunities with data-driven precision.",
+      "Build n8n workflows that sync data bidirectionally between tools. Real-time webhooks for instant updates. Conflict resolution with Python backend logic.",
     benefit:
-      "15-20% efficiency gain, identify $500K+ savings opportunities, data-driven prioritization",
-    industry: "Enterprise",
+      "Single source of truth, eliminate manual copy-paste, real-time insights across tools",
+    industry: "All",
   },
   {
     id: "6",
-    title: "Workflow Optimization",
-    icon: "GitBranch",
-    description: "Redesign processes for speed, cost, and compliance",
+    title: "Slack Bot & Team Notifications",
+    icon: "Bell",
+    description: "Real-time alerts and automations in team communication",
     problem:
-      "Processes evolved over years with workarounds and technical debt. Changes require months of planning and create business disruption.",
+      "Important events get missed. Team doesn't know about critical issues until too late. Manual status updates waste time.",
     solution:
-      "Conduct end-to-end workflow assessment, redesign with lean principles, implement automation and new tools, manage change through training and support.",
+      "Build Zapier/n8n workflows that post to Slack on events (errors, new leads, low inventory). Add interactive buttons for quick actions. Integrate with backend via webhooks.",
     benefit:
-      "40-60% cycle time reduction, $300K-1M+ annual savings, improved compliance",
+      "Real-time team awareness, faster incident response, reduced context-switching, automated action triggering",
     industry: "All",
   },
 ];

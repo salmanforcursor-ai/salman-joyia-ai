@@ -1,14 +1,15 @@
-User-agent: Googlebot
-Allow: /
+# robots.txt for salmanjoyia.com
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Allow all search engines
 User-agent: *
 Allow: /
+
+# Disallow admin/private areas (if any)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Sitemap location
+Sitemap: https://salmanjoyia.com/sitemap.xml
+
+# Crawl-delay (optional, in seconds)
+# Crawl-delay: 1

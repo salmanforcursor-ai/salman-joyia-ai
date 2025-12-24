@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -14,26 +14,6 @@ const navLinks = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof document !== "undefined") {
-      return document.documentElement.classList.contains("dark");
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const htmlElement = document.documentElement;
-    if (isDark) {
-      htmlElement.classList.add("dark");
-    } else {
-      htmlElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  }, [isDark]);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
 
   return (
     <>
@@ -57,29 +37,21 @@ export function Header() {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all"
+                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={`Navigate to ${link.label} section`}
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Right Section - Theme Toggle + CTA */}
+          {/* Right Section - CTA */}
           <div className="flex items-center gap-2 lg:gap-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-secondary transition-colors text-foreground"
-              aria-label="Toggle theme"
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-
             {/* CTA Button */}
             <div className="hidden lg:block">
               <Button asChild>
@@ -89,9 +61,11 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 text-foreground"
+              className="lg:hidden p-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -100,14 +74,15 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <nav className="lg:hidden py-4 border-t border-border/50">
+          <nav id="mobile-navigation" className="lg:hidden py-4 border-t border-border/50" aria-label="Mobile navigation">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors"
+                  className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   onClick={() => setIsOpen(false)}
+                  aria-label={`Navigate to ${link.label} section`}
                 >
                   {link.label}
                 </a>
