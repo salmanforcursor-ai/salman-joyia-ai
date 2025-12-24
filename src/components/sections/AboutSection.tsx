@@ -38,12 +38,12 @@ export function AboutSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 lg:mb-16">
             <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">About</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
               Enterprise AI & Automation Specialist
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               I'm Salman Joyia, an Enterprise AI Architect with 12+ years of experience transforming operations 
               for Fortune 500 companies. I specialize in designing and deploying enterprise-scale automation solutions 
               that eliminate manual work, drive measurable results, and unlock organizational efficiency.

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 lg:pt-28">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-subtle" />
       <div 
@@ -20,40 +20,40 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/50 border border-primary/10 mb-8 animate-fade-in">
-            <Bot size={16} className="text-primary" />
-            <span className="text-sm font-medium text-accent-foreground">AI Automation Engineer</span>
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-accent/50 border border-primary/10 mb-8 animate-fade-in shadow-sm">
+            <Bot size={16} className="text-primary flex-shrink-0" />
+            <span className="text-sm font-medium text-accent-foreground whitespace-nowrap">AI Automation Engineer</span>
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             Salman Joyia
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-muted-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
             Enterprise AI & Automation Architect
           </p>
 
           {/* Value Proposition */}
-          <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground mb-6 leading-relaxed animate-fade-in" style={{ animationDelay: "0.3s" }}>
+          <p className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-foreground mb-6 sm:mb-8 leading-relaxed animate-fade-in max-w-3xl mx-auto" style={{ animationDelay: "0.3s" }}>
             I transform business processes into <span className="text-gradient">intelligent, automated workflows</span> — delivering millions in value and freeing teams to focus on strategy.
           </p>
 
           {/* Trust Statement */}
-          <p className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.35s" }}>
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: "0.35s" }}>
             Trusted by Fortune 500 companies to architect RPA, AI/ML, and cloud solutions that eliminate manual work at scale.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            <Button size="lg" className="gap-2 text-base px-8" asChild>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-in mb-12 sm:mb-16" style={{ animationDelay: "0.4s" }}>
+            <Button size="lg" className="gap-2 text-base px-6 sm:px-8 w-full sm:w-auto shadow-lg hover:shadow-xl transition-shadow" asChild>
               <a href="#case-studies">
                 <Workflow size={20} />
                 See Case Studies
               </a>
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-base px-8" asChild>
+            <Button size="lg" variant="outline" className="gap-2 text-base px-6 sm:px-8 w-full sm:w-auto border-2 hover:bg-primary/5 transition-colors" asChild>
               <a href="#contact">
                 Start Your Project
                 <ArrowRight size={20} />
@@ -62,22 +62,22 @@ export function HeroSection() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mt-16 pt-16 border-t border-border/50 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">$15M+</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Client Value Created</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-12 sm:pt-16 border-t border-border/50 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-2">$15M+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Client Value Created</p>
             </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">100+</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Workflows Deployed</p>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-2">100+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Workflows Deployed</p>
             </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">50+</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Enterprise Clients</p>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-2">50+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Enterprise Clients</p>
             </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-primary">12+</p>
-              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Years Experience</p>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-2">12+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Years Experience</p>
             </div>
           </div>
         </div>
