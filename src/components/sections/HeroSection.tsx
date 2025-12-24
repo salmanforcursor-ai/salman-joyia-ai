@@ -31,44 +31,53 @@ export function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-muted-foreground mb-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            AI Automation Engineer | FastAPI Backend Developer | AI Agents & Workflow Specialist
+          <p className="text-lg sm:text-xl text-muted-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            Enterprise AI & Automation Architect
           </p>
 
           {/* Value Proposition */}
-          <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-foreground mb-10 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            I build <span className="text-gradient">AI-powered automation systems</span> that save time, reduce cost, and scale operations.
+          <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-foreground mb-6 leading-relaxed animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            I transform business processes into <span className="text-gradient">intelligent, automated workflows</span> — delivering millions in value and freeing teams to focus on strategy.
+          </p>
+
+          {/* Trust Statement */}
+          <p className="text-base sm:text-lg text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.35s" }}>
+            Trusted by Fortune 500 companies to architect RPA, AI/ML, and cloud solutions that eliminate manual work at scale.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
             <Button size="lg" className="gap-2 text-base px-8" asChild>
-              <a href="#use-cases">
+              <a href="#case-studies">
                 <Workflow size={20} />
-                View Automations
+                See Case Studies
               </a>
             </Button>
             <Button size="lg" variant="outline" className="gap-2 text-base px-8" asChild>
               <a href="#contact">
-                Contact Me
+                Start Your Project
                 <ArrowRight size={20} />
               </a>
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/50 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mt-16 pt-16 border-t border-border/50 animate-fade-in" style={{ animationDelay: "0.5s" }}>
             <div>
-              <p className="text-3xl sm:text-4xl font-bold text-foreground">50+</p>
-              <p className="text-sm text-muted-foreground mt-1">Automations Built</p>
+              <p className="text-2xl sm:text-3xl font-bold text-primary">$15M+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Client Value Created</p>
             </div>
             <div>
-              <p className="text-3xl sm:text-4xl font-bold text-foreground">1000+</p>
-              <p className="text-sm text-muted-foreground mt-1">Hours Saved</p>
+              <p className="text-2xl sm:text-3xl font-bold text-primary">100+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Workflows Deployed</p>
             </div>
             <div>
-              <p className="text-3xl sm:text-4xl font-bold text-foreground">100%</p>
-              <p className="text-sm text-muted-foreground mt-1">Client Satisfaction</p>
+              <p className="text-2xl sm:text-3xl font-bold text-primary">50+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Enterprise Clients</p>
+            </div>
+            <div>
+              <p className="text-2xl sm:text-3xl font-bold text-primary">12+</p>
+              <p className="text-xs sm:text-sm text-muted-foreground mt-1">Years Experience</p>
             </div>
           </div>
         </div>

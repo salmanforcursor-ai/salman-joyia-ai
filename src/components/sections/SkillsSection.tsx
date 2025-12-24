@@ -1,72 +1,18 @@
-import { 
-  Bot, 
-  Workflow, 
-  Plug, 
-  Cog,
-  Code2,
-  Database,
-  Globe,
-  Zap,
-  Eye,
-  Brain,
-  Cpu,
-  Sparkles,
-  Cloud,
-  GitBranch,
-  Container,
-  Webhook
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { skillsByCategory } from "@/data";
 
-const skillCategories = [
-  {
-    title: "AI & Automation",
-    icon: Bot,
-    color: "bg-primary/10 text-primary",
-    skills: [
-      { name: "n8n", icon: Workflow },
-      { name: "Make.com", icon: Cog },
-      { name: "AI Agents", icon: Bot },
-      { name: "Workflow Automation", icon: Zap },
-      { name: "API Integrations", icon: Plug },
-    ],
-  },
-  {
-    title: "Backend & Systems",
-    icon: Code2,
-    color: "bg-accent text-accent-foreground",
-    skills: [
-      { name: "FastAPI", icon: Zap },
-      { name: "Python", icon: Code2 },
-      { name: "REST APIs", icon: Globe },
-      { name: "WebSockets", icon: Plug },
-      { name: "Background Tasks", icon: Cog },
-    ],
-  },
-  {
-    title: "AI & Data",
-    icon: Brain,
-    color: "bg-primary/10 text-primary",
-    skills: [
-      { name: "Computer Vision", icon: Eye },
-      { name: "LLM Integration", icon: Sparkles },
-      { name: "Model Inference", icon: Cpu },
-      { name: "OpenAI / HuggingFace", icon: Brain },
-      { name: "Data Processing", icon: Database },
-    ],
-  },
-  {
-    title: "Cloud & Tools",
-    icon: Cloud,
-    color: "bg-accent text-accent-foreground",
-    skills: [
-      { name: "AWS / Azure", icon: Cloud },
-      { name: "Git & GitHub", icon: GitBranch },
-      { name: "Docker", icon: Container },
-      { name: "Webhooks", icon: Webhook },
-      { name: "CI/CD", icon: Cog },
-    ],
-  },
-];
+const categoryIcons: Record<string, string> = {
+  "AI & Machine Learning": "🤖",
+  "RPA & Automation": "⚡",
+  "Cloud Platforms": "☁️",
+  "Data & Analytics": "📊",
+};
+
+const proficiencyColors: Record<string, string> = {
+  expert: "bg-primary/20 text-primary border-primary/30",
+  advanced: "bg-accent/20 text-accent-foreground border-accent/30",
+  intermediate: "bg-secondary/50 text-secondary-foreground",
+};
 
 export function SkillsSection() {
   return (
@@ -75,40 +21,57 @@ export function SkillsSection() {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Core Skills</p>
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">Expertise</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Technical Expertise
+              Technical Skills & Proficiency
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive skill set spanning AI, automation, backend development, and cloud technologies 
-              to deliver end-to-end solutions.
+              Expert-level knowledge across AI, RPA, cloud platforms, and modern data technologies.
             </p>
           </div>
 
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {skillCategories.map((category, categoryIndex) => (
+          {/* Skills Grid by Category */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
               <div
-                key={category.title}
-                className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card hover-lift"
+                key={category}
+                className="p-6 lg:p-8 bg-card rounded-2xl border border-border/50 shadow-card hover:shadow-lg transition-shadow"
               >
                 {/* Category Header */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className={`w-12 h-12 rounded-xl ${category.color} flex items-center justify-center`}>
-                    <category.icon size={24} />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground">{category.title}</h3>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-2xl">{categoryIcons[category] || "📚"}</span>
+                  <h3 className="text-xl font-semibold text-foreground">{category}</h3>
                 </div>
 
                 {/* Skills List */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {category.skills.map((skill) => (
-                    <div
-                      key={skill.name}
-                      className="flex items-center gap-2 px-3 py-2 bg-secondary/50 rounded-lg"
-                    >
-                      <skill.icon size={16} className="text-muted-foreground flex-shrink-0" />
-                      <span className="text-sm font-medium text-foreground truncate">{skill.name}</span>
+                <div className="space-y-3">
+                  {categorySkills.map((skill) => (
+                    <div key={skill.id} className="flex items-start justify-between gap-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="font-medium text-foreground">{skill.name}</p>
+                          <Badge
+                            variant="outline"
+                            className={`text-xs ${proficiencyColors[skill.proficiency]}`}
+                          >
+                            {skill.proficiency}
+                          </Badge>
+                        </div>
+                        <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${
+                              skill.proficiency === "expert"
+                                ? "bg-primary w-full"
+                                : skill.proficiency === "advanced"
+                                  ? "bg-accent w-4/5"
+                                  : "bg-muted-foreground w-3/5"
+                            }`}
+                          />
+                        </div>
+                      </div>
+                      <span className="text-xs text-muted-foreground whitespace-nowrap">
+                        {skill.yearsOfExperience}y
+                      </span>
                     </div>
                   ))}
                 </div>
