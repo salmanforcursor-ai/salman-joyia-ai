@@ -25,25 +25,24 @@ export function Header() {
         Skip to main content
       </a>
       
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">SJ</span>
+            <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
+              <img src="/logo.svg" alt="SJ" className="w-8 h-8 block" />
             </div>
-            <span className="font-semibold text-foreground hidden sm:block">Salman Joyia</span>
+            <span className="font-semibold text-foreground hidden sm:block">Muhammad Salman Iqbal</span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                aria-label={`Navigate to ${link.label} section`}
+                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all"
               >
                 {link.label}
               </a>
@@ -61,11 +60,9 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+              className="lg:hidden p-2 text-foreground"
               onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
-              aria-controls="mobile-navigation"
+              aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -74,15 +71,14 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <nav id="mobile-navigation" className="lg:hidden py-4 border-t border-border/50" aria-label="Mobile navigation">
+          <nav className="lg:hidden py-4 border-t border-border/50">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="px-4 py-3 text-foreground hover:bg-secondary rounded-lg transition-colors"
                   onClick={() => setIsOpen(false)}
-                  aria-label={`Navigate to ${link.label} section`}
                 >
                   {link.label}
                 </a>

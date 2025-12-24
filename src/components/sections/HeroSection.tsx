@@ -27,7 +27,7 @@ export function HeroSection() {
 
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-[1.1] mb-4 sm:mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Salman Joyia
+            Muhammad Salman Iqbal
           </h1>
 
           {/* Subtitle */}

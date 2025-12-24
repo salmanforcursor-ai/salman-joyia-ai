@@ -11,11 +11,11 @@ export function Footer() {
           {/* Logo & Copyright */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">SJ</span>
+              <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+                <img src="/logo.svg" alt="SJ" className="w-5 h-5 block" />
               </div>
               <p className="text-sm text-muted-foreground">
-                © {currentYear} Salman Joyia. All rights reserved.
+                © {currentYear} Muhammad Salman Iqbal. All rights reserved.
               </p>
             </div>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">

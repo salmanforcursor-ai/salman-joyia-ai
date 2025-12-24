@@ -31,7 +31,7 @@ export const config: Config = {
   },
   site: {
     url: import.meta.env.VITE_SITE_URL || 'https://salmanwithai.vercel.app/',
-    name: 'Salman Joyia',
+    name: 'Muhammad Salman Iqbal',
   },
 };
 
