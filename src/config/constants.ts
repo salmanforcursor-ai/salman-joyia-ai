@@ -21,16 +21,16 @@ interface Config {
 
 export const config: Config = {
   formspreeId: import.meta.env.VITE_FORMSPREE_ID || '',
-  contactEmail: import.meta.env.VITE_CONTACT_EMAIL || 'contact@example.com',
+  contactEmail: import.meta.env.VITE_CONTACT_EMAIL || 'salmanjoyiaa@gmail.com',
   social: {
-    linkedin: import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/yourprofile',
-    github: import.meta.env.VITE_GITHUB_URL || 'https://github.com/yourprofile',
+    linkedin: import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/salmanjoyiaa',
+    github: import.meta.env.VITE_GITHUB_URL || 'https://github.com/salmanjoyiaa',
   },
   analytics: {
     gaId: import.meta.env.VITE_GA_MEASUREMENT_ID,
   },
   site: {
-    url: import.meta.env.VITE_SITE_URL || 'https://example.com',
+    url: import.meta.env.VITE_SITE_URL || 'https://salmanwithai.vercel.app/',
     name: 'Salman Joyia',
   },
 };
